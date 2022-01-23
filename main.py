@@ -16,7 +16,7 @@ def main(name):
     print(f"Hello {name}")
 
 url=" https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search"
-def get_respone(urlx):
+def get_respone_from_website(urlx):
     endpoint = url
     body = {
         "page": 1,
@@ -41,7 +41,7 @@ def get_respone(urlx):
     return reponse
 
 
-def cal_avg(reponse):
+def cal_avg_price_coin_in_website(reponse):
     content = reponse.json()['data']
     try:
         with sqlite3.connect('price.db') as conn:
@@ -64,7 +64,7 @@ def cal_avg(reponse):
         return 0
 
 
-def draw(df,data):
+def draw_price_coin_binance(df,data):
     df = pd.DataFrame(data, columns=['day', 'price'])
     print(df)
     df.plot(x='day', y='price', kind='scatter')
